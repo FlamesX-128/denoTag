@@ -1,5 +1,5 @@
 # **Deno Tag**
-It is an html preprocessor that includes a tag called "deno" where you can execute code.
+A simple html preprocessor for deno.
 
 ## **Change Log:**
 This is the list of changes:
