@@ -53,6 +53,7 @@ async function render(filePath: string): Promise<string> {
     return target;
   }
 
+  const asyncFunction: FunctionConstructor = Object.getPrototypeOf(async function(){}).constructor;
 
   return await (
     /**
@@ -101,7 +102,7 @@ async function render(filePath: string): Promise<string> {
        * This creates a function with the code to execute and receives the return.
        * @type {string[]}
        */
-      const result: string[] = await new Function(`
+      const result: string[] = await new asyncFunction(`
         /**
          * This is the variable in charge of receiving and returning the changes in the html.
          * @type {string[]} 
@@ -122,14 +123,13 @@ async function render(filePath: string): Promise<string> {
          * This function is responsible for executing the code declared in the deno tag.
          * @returns {Promise<void> | void} 
          */
-        (async function main() {
+        await (async function main() {
           ${file.slice(open+6, close)}
         })();
 
 
         return ${privateVar};
       `)();
-
 
       return await lookingDeno(
         file.replace(file.slice(open, close + 7), result.join("\n"))

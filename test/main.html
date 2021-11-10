@@ -27,5 +27,15 @@
     }
   </deno>
 
+  <deno>
+    let i = 0;
+
+    for (; i < 30; i++) {
+      await fetch("https://www.google.com/")
+    }
+
+    write(`${i}`)
+  </deno>
+
 </body>
 </html>
