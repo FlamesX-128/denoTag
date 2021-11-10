@@ -14,7 +14,19 @@ This is the list of changes:
 
 ### **Examples:**
 Example One:
+```ts
+// main.ts
+import render from "https://deno.land/x/denotag/mod.ts";
+
+(async function main() {
+  const res = await render("./main.html");
+  
+  console.log(res);
+})();
+```
+
 ```html
+<!-- main.html -->
 <body>
   <deno>
     // This is a standard function that adds something to the html.
@@ -31,7 +43,19 @@ Result:
 ```
 
 Example Two:
+```ts
+// main.ts
+import render from "https://deno.land/x/denotag/mod.ts";
+
+(async function main() {
+  const res = await render("./main.html");
+  
+  console.log(res);
+})();
+```
+
 ```html
+<!-- main.html -->
 <body>
   <deno>
     for (const txt of ["orange", "apple"]) {
