@@ -6,7 +6,12 @@ import render from "../mod.ts";
 
 (async function main(): Promise<void> {
   const res: string = await render(
-    join(dirname(fromFileUrl(import.meta.url)), "main.html")
+    join(dirname(fromFileUrl(import.meta.url)), "main.html"),
+    {
+      hola() {
+        return "a"
+      }
+    }
   );
 
   console.log(res);

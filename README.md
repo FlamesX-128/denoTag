@@ -2,6 +2,9 @@
 A simple html preprocessor for deno.
 
 ## **ChangeLog**
+`0.1.0` - Server variables:
+  - Now you can use send variables.
+
 `0.0.2` - Bug in await fixed:
   - Fixed a bug that did not allow use of await.
 
@@ -52,7 +55,9 @@ import render from "https://deno.land/x/denotag/mod.ts";
 import render from "https://deno.land/x/denotag/mod.ts";
 
 (async function main() {
-  const res = await render("./main.html");
+  const res = await render("./main.html", {
+    hello: "hello world!"
+  });
   
   console.log(res);
 })();
@@ -62,9 +67,11 @@ import render from "https://deno.land/x/denotag/mod.ts";
 <!-- main.html -->
 <body>
   <deno>
-    for (const txt of ["orange", "apple"]) {
+    for (const txt of ["orange", "apple"]) 
       write(txt);
-    }
+    
+    // Get sent variable.
+    write(data.hello)
   </deno>
 </body>
 ```
@@ -75,6 +82,7 @@ import render from "https://deno.land/x/denotag/mod.ts";
 <body>
   orange
   apple
+  hello world!
 </body>
 ```
 

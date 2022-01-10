@@ -5,7 +5,7 @@ import { cryptoRandomString } from "./deps.ts";
  * @param {string} filePath - This is the path of the file to render.
  * @returns {Promise<string>}
  */
-async function render(filePath: string): Promise<string> {
+async function render(filePath: string, data?: Record<string, unknown>): Promise<string> {
   if (!Deno.statSync(filePath))
     throw new Error(`The file with the path "${filePath}" does not exist!`);
 
@@ -102,7 +102,7 @@ async function render(filePath: string): Promise<string> {
        * This creates a function with the code to execute and receives the return.
        * @type {string[]}
        */
-      const result: string[] = await new asyncFunction(`
+      const result: string[] = await new asyncFunction("data", `
         /**
          * This is the variable in charge of receiving and returning the changes in the html.
          * @type {string[]} 
@@ -129,7 +129,7 @@ async function render(filePath: string): Promise<string> {
 
 
         return ${privateVar};
-      `)();
+      `)(data);
 
       return await lookingDeno(
         file.replace(file.slice(open, close + 7), result.join("\n"))
