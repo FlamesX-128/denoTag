@@ -1,97 +1,65 @@
-# **Deno Tag**
-A simple html preprocessor for deno.
+# Deno Tag
 
-## **ChangeLog**
-`0.1.0` - Server variables:
-  - Now you can use send variables.
+A simple HTML preprocessor for Deno.
 
-`0.0.2` - Bug in await fixed:
-  - Fixed a bug that did not allow use of await.
+## Example
 
-`0.0.1` - First release:
-  + This is the first version!
+```ts, deno@2.2.0
+import { render } from "https://deno.land/x/denotag@0.2.0/mod.ts";
 
----
+const html = Deno.readTextFileSync(
+    new URL("assets/main.html", import.meta.url)
+);
 
-## **Examples**
-
-`Example One:`
-
-```ts
-// main.ts
-import render from "https://deno.land/x/denotag/mod.ts";
-
-(async function main() {
-  const res = await render("./main.html");
-  
-  console.log(res);
-})();
+console.log(
+    await render(html, {
+        params: {
+            timestamp: Date.now()
+        }
+    })
+)
 ```
 
 ```html
-<!-- main.html -->
+<!-- You can use <deno>, <script type="application/typescript">, or a custom query by adjusting the configuration. -->
 <body>
-  <deno>
-    // This is a standard function that adds something to the html.
-    Write("Hello world");
-  </deno>
-</body>
-```
-
-`Result:`
-
-```html
-<body>
-  Hello world
-</body>
-```
-
----
-
-`Example Two:`
-
-```ts
-// main.ts
-import render from "https://deno.land/x/denotag/mod.ts";
-
-(async function main() {
-  const res = await render("./main.html", {
-    hello: "hello world!"
-  });
-  
-  console.log(res);
-})();
-```
-
-```html
-<!-- main.html -->
-<body>
-  <deno>
-    for (const txt of ["orange", "apple"]) 
-      write(txt);
+    <p>
+        The value of the fibonacci sequence is:
+        <script type="application/typescript">
+            function fibonacci(n: number): number {
+                if (n <= 1) {
+                    return n;
+                }
+                return fibonacci(n - 1) + fibonacci(n - 2);
+            }
     
-    // Get sent variable.
-    write(data.hello)
-  </deno>
+            return fibonacci(20);
+        </script>
+    </p>
+
+    <deno>
+        return Date.now() - params.timestamp;
+    </deno>
 </body>
 ```
-
-`Result:`
 
 ```html
+<!-- When evaluated, it becomes into this -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>denoTag</title>
+</head>
+
 <body>
-  orange
-  apple
-  hello world!
+    <p>
+        The value of the fibonacci sequence is:
+        6765
+    </p>
+
+    13
 </body>
+
+</html>
 ```
-
----
-
-## **Information:**
-Deno tag only accepts JS, tested with:
-  - deno 1.14.3 (release, x86_64-unknown-linux-gnu)
-
-  - v8 9.4.146.19
-
-  - typescript 4.4.2

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>denoTag</title>
+</head>
+
+<body>
+    <p>
+        The value of the fibonacci sequence is:
+        <script type="application/typescript">
+            function fibonacci(n: number): number {
+                if (n <= 1) {
+                    return n;
+                }
+                return fibonacci(n - 1) + fibonacci(n - 2);
+            }
+    
+            return fibonacci(20);
+        </script>
+    </p>
+
+    <deno>
+        return Date.now() - params.timestamp;
+    </deno>
+</body>
+
+</html>
