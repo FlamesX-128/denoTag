@@ -45,13 +45,6 @@ console.log(
 
 ```html
 <!-- When evaluated, it becomes into this -->
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <title>denoTag</title>
-</head>
-
 <body>
     <p>
         The value of the fibonacci sequence is:
@@ -60,6 +53,4 @@ console.log(
 
     13
 </body>
-
-</html>
 ```
